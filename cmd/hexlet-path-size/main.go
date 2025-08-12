@@ -20,6 +20,12 @@ func main() {
 				Usage:   "human-readable sizes (auto-select unit)",
 				Aliases: []string{"H"},
 			},
+			&cli.BoolFlag{
+				Name:    "all",
+				Value:   false,
+				Usage:   "include hidden files and directories",
+				Aliases: []string{"a"},
+			},
 		},
 		Arguments: []cli.Argument{
 			&cli.StringArg{
@@ -49,29 +55,4 @@ func main() {
 		fmt.Fprintln(os.Stderr, "Error:", err)
 		os.Exit(1)
 	}
-
-	// flag.Parse()
-
-	// if flag.NArg() < 1 {
-	// 	fmt.Fprintln(os.Stderr, "Error: path is required")
-	// 	os.Exit(1)
-	// }
-
-	// path := flag.Arg(0)
-
-	// size, err := getSize(path, flagRecursive, flagAll)
-	// if err != nil {
-	// 	fmt.Fprintln(os.Stderr, "Error:", err)
-	// 	os.Exit(0)
-	// }
-
-	// var sizeStr string
-
-	// if flagHumanReadable {
-	// 	sizeStr = humanize.Bytes(uint64(size))
-	// } else {
-	// 	sizeStr = fmt.Sprint(size)
-	// }
-
-	// fmt.Println(sizeStr, path)
 }
