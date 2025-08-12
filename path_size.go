@@ -73,6 +73,6 @@ func FormatSize(size int64, human bool) string {
 	if human {
 		return humanize.Bytes(uint64(size))
 	} else {
-		return fmt.Sprint(size)
+		return fmt.Sprint(size, " B")
 	}
 }

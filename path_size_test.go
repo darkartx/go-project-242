@@ -64,9 +64,9 @@ func TestGetSizeWithAllAndRecurcive(t *testing.T) {
 
 func TestFormatSize(t *testing.T) {
 	cases := map[int64]string{
-		1000:      "1000",
-		1000000:   "1000000",
-		123456789: "123456789",
+		1000:      "1000 B",
+		1000000:   "1000000 B",
+		123456789: "123456789 B",
 	}
 
 	for value, expected := range cases {
