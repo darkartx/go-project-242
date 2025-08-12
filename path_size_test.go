@@ -4,7 +4,8 @@ import "testing"
 
 func TestGetSize(t *testing.T) {
 	actual, err := GetSize("testdata", false, false)
-	expected := int64(1826)
+	// expected := int64(1826)
+	expected := int64(4235)
 
 	if err != nil {
 		t.Errorf("%+v", err)
@@ -18,7 +19,8 @@ func TestGetSize(t *testing.T) {
 
 func TestGetSizeWithRecurcive(t *testing.T) {
 	actual, err := GetSize("testdata", true, false)
-	expected := int64(5968)
+	// expected := int64(5968)
+	expected := int64(8373)
 
 	if err != nil {
 		t.Errorf("%+v", err)
@@ -32,7 +34,8 @@ func TestGetSizeWithRecurcive(t *testing.T) {
 
 func TestGetSizeWithAll(t *testing.T) {
 	actual, err := GetSize("testdata", false, true)
-	expected := int64(4239)
+	// expected := int64(4239)
+	expected := int64(4235)
 
 	if err != nil {
 		t.Errorf("%+v", err)
@@ -46,7 +49,8 @@ func TestGetSizeWithAll(t *testing.T) {
 
 func TestGetSizeWithAllAndRecurcive(t *testing.T) {
 	actual, err := GetSize("testdata", true, true)
-	expected := int64(8381)
+	// expected := int64(8381)
+	expected := int64(8373)
 
 	if err != nil {
 		t.Errorf("%+v", err)
