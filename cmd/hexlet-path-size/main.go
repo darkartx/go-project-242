@@ -7,13 +7,20 @@ import (
 	"os"
 
 	path_size "github.com/darkartx/go-project-242"
-	humanize "github.com/dustin/go-humanize"
 	cli "github.com/urfave/cli/v3"
 )
 
 func main() {
 	cmd := &cli.Command{
 		Usage: "print size of a file or directory",
+		Flags: []cli.Flag{
+			&cli.BoolFlag{
+				Name:    "human",
+				Value:   false,
+				Usage:   "human-readable sizes (auto-select unit)",
+				Aliases: []string{"H"},
+			},
+		},
 		Arguments: []cli.Argument{
 			&cli.StringArg{
 				Name: "path",
@@ -32,14 +39,7 @@ func main() {
 				return err
 			}
 
-			// var sizeStr string
-			// if flagHumanReadable {
-			sizeStr := humanize.Bytes(uint64(size))
-			// } else {
-			// sizeStr = fmt.Sprint(size)
-			// }
-
-			fmt.Println(sizeStr, path)
+			fmt.Println(path_size.FormatSize(size, cmd.Bool("human")), path)
 
 			return nil
 		},

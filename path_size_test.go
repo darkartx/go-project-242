@@ -61,3 +61,37 @@ func TestGetSizeWithAllAndRecurcive(t *testing.T) {
 		t.Errorf("Actual %d not equal to expected %d", actual, expected)
 	}
 }
+
+func TestFormatSize(t *testing.T) {
+	cases := map[int64]string{
+		1000:      "1000",
+		1000000:   "1000000",
+		123456789: "123456789",
+	}
+
+	for value, expected := range cases {
+		actual := FormatSize(value, false)
+
+		if actual != expected {
+			t.Errorf("Actual %s not equal to expected %s", actual, expected)
+			return
+		}
+	}
+}
+
+func TestFormatSizeWithHuman(t *testing.T) {
+	cases := map[int64]string{
+		1000:      "1.0 kB",
+		1000000:   "1.0 MB",
+		123456789: "124 MB",
+	}
+
+	for value, expected := range cases {
+		actual := FormatSize(value, true)
+
+		if actual != expected {
+			t.Errorf("Actual %s not equal to expected %s", actual, expected)
+			return
+		}
+	}
+}

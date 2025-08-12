@@ -1,8 +1,11 @@
 package path_size
 
 import (
+	"fmt"
 	"os"
 	"path/filepath"
+
+	"github.com/dustin/go-humanize"
 )
 
 // Собираем размер файлов по пути
@@ -64,4 +67,12 @@ func GetSize(path string, rcrcv, all bool) (int64, error) {
 	}
 
 	return totalSize, nil
+}
+
+func FormatSize(size int64, human bool) string {
+	if human {
+		return humanize.Bytes(uint64(size))
+	} else {
+		return fmt.Sprint(size)
+	}
 }
