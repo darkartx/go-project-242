@@ -32,9 +32,9 @@ func main() {
 				return err
 			}
 
-			var sizeStr string
+			// var sizeStr string
 			// if flagHumanReadable {
-			sizeStr = humanize.Bytes(uint64(size))
+			sizeStr := humanize.Bytes(uint64(size))
 			// } else {
 			// sizeStr = fmt.Sprint(size)
 			// }
