@@ -29,8 +29,10 @@ func GetSize(path string, rcrcv, all bool) (int64, error) {
 	}
 
 	for _, e := range entries {
+		newPath := filepath.Join(path, e.Name())
+
 		if !all {
-			hdn, err := isHidden(e.Name())
+			hdn, err := isHidden(newPath)
 			if err != nil {
 				return 0, err
 			}
@@ -42,7 +44,6 @@ func GetSize(path string, rcrcv, all bool) (int64, error) {
 
 		if e.IsDir() {
 			if rcrcv {
-				newPath := filepath.Join(path, e.Name())
 				size, err := GetSize(newPath, rcrcv, all)
 				if err != nil {
 					return 0, err
