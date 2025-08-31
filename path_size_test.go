@@ -2,8 +2,8 @@ package code
 
 import "testing"
 
-func TestGetSize(t *testing.T) {
-	actual, err := GetSize("testdata", false, false)
+func TestGetPathSize(t *testing.T) {
+	actual, err := GetPathSize("testdata", false, false)
 	// expected := int64(1826)
 	expected := int64(4235)
 
@@ -17,8 +17,8 @@ func TestGetSize(t *testing.T) {
 	}
 }
 
-func TestGetSizeWithRecurcive(t *testing.T) {
-	actual, err := GetSize("testdata", true, false)
+func TestGetPathSizeWithRecurcive(t *testing.T) {
+	actual, err := GetPathSize("testdata", true, false)
 	// expected := int64(5968)
 	expected := int64(8373)
 
@@ -32,8 +32,8 @@ func TestGetSizeWithRecurcive(t *testing.T) {
 	}
 }
 
-func TestGetSizeWithAll(t *testing.T) {
-	actual, err := GetSize("testdata", false, true)
+func TestGetPathSizeWithAll(t *testing.T) {
+	actual, err := GetPathSize("testdata", false, true)
 	// expected := int64(4239)
 	expected := int64(4235)
 
@@ -47,8 +47,8 @@ func TestGetSizeWithAll(t *testing.T) {
 	}
 }
 
-func TestGetSizeWithAllAndRecurcive(t *testing.T) {
-	actual, err := GetSize("testdata", true, true)
+func TestGetPathSizeWithAllAndRecurcive(t *testing.T) {
+	actual, err := GetPathSize("testdata", true, true)
 	// expected := int64(8381)
 	expected := int64(8373)
 

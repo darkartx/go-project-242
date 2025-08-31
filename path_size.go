@@ -14,7 +14,7 @@ import (
 //
 //	если передан флаг rcrcv рекурсивно считаем размер файлов внутри папок в этой папке
 //	если передан флаг all у скрытых файлов тоже будет считаться размер
-func GetSize(path string, rcrcv, all bool) (int64, error) {
+func GetPathSize(path string, rcrcv, all bool) (int64, error) {
 	info, err := os.Lstat(path)
 	if err != nil {
 		return 0, err
@@ -47,7 +47,7 @@ func GetSize(path string, rcrcv, all bool) (int64, error) {
 
 		if e.IsDir() {
 			if rcrcv {
-				size, err := GetSize(newPath, rcrcv, all)
+				size, err := GetPathSize(newPath, rcrcv, all)
 				if err != nil {
 					return 0, err
 				}
