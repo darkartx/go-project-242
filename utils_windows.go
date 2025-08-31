@@ -1,6 +1,6 @@
 //go:build windows
 
-package path_size
+package code
 
 import (
 	"syscall"
