@@ -1,6 +1,6 @@
 //go:build !windows
 
-package path_size
+package code
 
 func isHidden(filename string) (bool, error) {
 	return filename[0] == '.', nil
