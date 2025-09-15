@@ -6,7 +6,8 @@ import (
 	"fmt"
 	"os"
 
-	path_size "github.com/darkartx/go-project-242"
+	code "github.com/darkartx/go-project-242"
+
 	cli "github.com/urfave/cli/v3"
 )
 
@@ -47,14 +48,15 @@ func main() {
 
 			all := cmd.Bool("all")
 			recursive := cmd.Bool("recursive")
+			human := cmd.Bool("human")
 
-			size, err := path_size.GetPathSize(path, recursive, all)
+			size, err := code.GetPathSize(path, recursive, human, all)
 
 			if err != nil {
 				return err
 			}
 
-			fmt.Println(path_size.FormatSize(size, cmd.Bool("human")), path)
+			fmt.Println(size, path)
 
 			return nil
 		},
