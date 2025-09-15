@@ -4,17 +4,19 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
-
-	"github.com/dustin/go-humanize"
 )
 
-// Собираем размер файлов по пути
-// Если путь - файл, возвращаем его размер
-// Если путь - папка, возвращаем размер файлов находящихся в ней
-//
-//	если передан флаг rcrcv рекурсивно считаем размер файлов внутри папок в этой папке
-//	если передан флаг all у скрытых файлов тоже будет считаться размер
-func GetPathSize(path string, rcrcv, all bool) (int64, error) {
+func GetPathSize(path string, recursive, human, all bool) (string, error) {
+	size, err := GetSize(path, recursive, all)
+
+	if err != nil {
+		return "", err
+	}
+
+	return FormatSize(size, human), nil
+}
+
+func GetSize(path string, recursive, all bool) (int64, error) {
 	info, err := os.Lstat(path)
 	if err != nil {
 		return 0, err
@@ -46,8 +48,8 @@ func GetPathSize(path string, rcrcv, all bool) (int64, error) {
 		}
 
 		if e.IsDir() {
-			if rcrcv {
-				size, err := GetPathSize(newPath, rcrcv, all)
+			if recursive {
+				size, err := GetSize(newPath, recursive, all)
 				if err != nil {
 					return 0, err
 				}
@@ -70,9 +72,23 @@ func GetPathSize(path string, rcrcv, all bool) (int64, error) {
 }
 
 func FormatSize(size int64, human bool) string {
-	if human {
-		return humanize.Bytes(uint64(size))
-	} else {
-		return fmt.Sprint(size, " B")
+	if !human {
+		return fmt.Sprintf("%dB", size)
 	}
+
+	const unit = 1024
+	if size < unit {
+		return fmt.Sprintf("%dB", size)
+	}
+	div, exp := uint64(unit), 0
+	for n := size / unit; n >= unit; n /= unit {
+		div *= unit
+		exp++
+	}
+
+	return fmt.Sprintf("%.1f%cB", float64(size)/float64(div), "KMGTPE"[exp])
+}
+
+func isHidden(filename string) (bool, error) {
+	return filename[0] == '.', nil
 }

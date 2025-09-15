@@ -2,8 +2,8 @@ package code
 
 import "testing"
 
-func TestGetPathSize(t *testing.T) {
-	actual, err := GetPathSize("testdata", false, false)
+func TestGetSize(t *testing.T) {
+	actual, err := GetSize("testdata", false, false)
 	// expected := int64(1826)
 	expected := int64(4235)
 
@@ -17,8 +17,8 @@ func TestGetPathSize(t *testing.T) {
 	}
 }
 
-func TestGetPathSizeWithRecurcive(t *testing.T) {
-	actual, err := GetPathSize("testdata", true, false)
+func TestGetSizeWithRecurcive(t *testing.T) {
+	actual, err := GetSize("testdata", true, false)
 	// expected := int64(5968)
 	expected := int64(8373)
 
@@ -32,8 +32,8 @@ func TestGetPathSizeWithRecurcive(t *testing.T) {
 	}
 }
 
-func TestGetPathSizeWithAll(t *testing.T) {
-	actual, err := GetPathSize("testdata", false, true)
+func TestGetSizeWithAll(t *testing.T) {
+	actual, err := GetSize("testdata", false, true)
 	// expected := int64(4239)
 	expected := int64(4235)
 
@@ -47,8 +47,8 @@ func TestGetPathSizeWithAll(t *testing.T) {
 	}
 }
 
-func TestGetPathSizeWithAllAndRecurcive(t *testing.T) {
-	actual, err := GetPathSize("testdata", true, true)
+func TestGetSizeWithAllAndRecurcive(t *testing.T) {
+	actual, err := GetSize("testdata", true, true)
 	// expected := int64(8381)
 	expected := int64(8373)
 
@@ -64,9 +64,9 @@ func TestGetPathSizeWithAllAndRecurcive(t *testing.T) {
 
 func TestFormatSize(t *testing.T) {
 	cases := map[int64]string{
-		1000:      "1000 B",
-		1000000:   "1000000 B",
-		123456789: "123456789 B",
+		1000:      "1000B",
+		1000000:   "1000000B",
+		123456789: "123456789B",
 	}
 
 	for value, expected := range cases {
@@ -81,9 +81,9 @@ func TestFormatSize(t *testing.T) {
 
 func TestFormatSizeWithHuman(t *testing.T) {
 	cases := map[int64]string{
-		1000:      "1.0 kB",
-		1000000:   "1.0 MB",
-		123456789: "124 MB",
+		1024:       "1.0KB",
+		1234567:    "1.2MB",
+		1234567890: "1.1GB",
 	}
 
 	for value, expected := range cases {
