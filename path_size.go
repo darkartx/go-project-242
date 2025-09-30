@@ -34,21 +34,15 @@ func GetSize(path string, recursive, all bool) (int64, error) {
 	}
 
 	for _, e := range entries {
-		newPath := filepath.Join(path, e.Name())
-
 		if !all {
-			hdn, err := isHidden(newPath)
-			if err != nil {
-				return 0, err
-			}
-
-			if hdn {
+			if isHidden(e.Name()) {
 				continue
 			}
 		}
 
 		if e.IsDir() {
 			if recursive {
+				newPath := filepath.Join(path, e.Name())
 				size, err := GetSize(newPath, recursive, all)
 				if err != nil {
 					return 0, err
@@ -89,6 +83,6 @@ func FormatSize(size int64, human bool) string {
 	return fmt.Sprintf("%.1f%cB", float64(size)/float64(div), "KMGTPE"[exp])
 }
 
-func isHidden(filename string) (bool, error) {
-	return filename[0] == '.', nil
+func isHidden(filename string) bool {
+	return filename[0] == '.'
 }
